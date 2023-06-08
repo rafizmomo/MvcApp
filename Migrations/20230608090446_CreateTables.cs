@@ -10,15 +10,11 @@ namespace MvcApp.Migrations
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.AlterDatabase()
-                .Annotation("MySql:CharSet", "utf8mb4");
-
             migrationBuilder.CreateTable(
                  name: "Table_Group",
                  columns: table => new
                  {
-                     GroupID = table.Column<int>(nullable: false)
-                         .Annotation("SqlServer:Identity", "1, 1"),
+                     GroupID = table.Column<string>(maxLength: 30, nullable: false),
                      GroupName = table.Column<string>(maxLength: 100, nullable: true)
                  },
                  constraints: table =>
@@ -30,8 +26,7 @@ namespace MvcApp.Migrations
                 name: "Table_Menu",
                 columns: table => new
                 {
-                    MenuID = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    MenuID = table.Column<string>(maxLength: 30, nullable: false),
                     MenuName = table.Column<string>(maxLength: 100, nullable: true),
                     Sequence = table.Column<long>(nullable: false)
                 },
@@ -44,11 +39,10 @@ namespace MvcApp.Migrations
                 name: "Table_User",
                 columns: table => new
                 {
-                    UserID = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    UserID = table.Column<string>(maxLength: 30, nullable: false),
                     UserName = table.Column<string>(maxLength: 100, nullable: true),
                     Password = table.Column<string>(maxLength: 100, nullable: true),
-                    GroupID = table.Column<int>(nullable: true)
+                    GroupID = table.Column<string>(maxLength: 30, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -65,8 +59,8 @@ namespace MvcApp.Migrations
                 name: "Table_Group_Access",
                 columns: table => new
                 {
-                    GroupID = table.Column<int>(nullable: false),
-                    MenuID = table.Column<int>(nullable: false)
+                    GroupID = table.Column<string>(maxLength: 30, nullable: false),
+                    MenuID = table.Column<string>(maxLength: 30, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -94,6 +88,7 @@ namespace MvcApp.Migrations
                 name: "IX_Table_User_GroupID",
                 table: "Table_User",
                 column: "GroupID");
+
         }
 
         /// <inheritdoc />
